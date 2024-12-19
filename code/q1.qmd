@@ -1,0 +1,71 @@
+Import the necessary libraries. 
+```{r}
+library(httr2)
+library(tidyverse)
+library(janitor)
+library(jsonlite)
+library(purrr)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+```
+
+Load in the dataset. 
+```{r}
+load("WrangledData.rdata")
+dat <- get("dat")
+head(dat)
+```
+
+Create a dataframe called us_cases that combines all the cases for all US states. 
+```{r}
+us_cases <- dat |>
+  mutate(
+    year = year(as.Date(date)), 
+    month = month(as.Date(date), label = TRUE)
+  ) |>
+  group_by(year, month) |>
+  summarize(
+    total_cases = sum(cases, na.rm = TRUE),
+    total_population = sum(population, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  mutate(
+    date = as.Date(paste(year, month, "1", sep = "-"), format = "%Y-%b-%d")
+  ) |>
+  mutate(cases_per_100k = (total_cases / total_population) * 100000) |>
+  drop_na(cases_per_100k)
+head(us_cases,2)
+```
+
+Plot the total COVID-19 cases by month/year in the US. 
+```{r}
+ggplot(us_cases, aes(x = date, y = cases_per_100k)) +
+  geom_line() +
+  labs(
+    title = "Total COVID-19 Cases by Month in the US",
+    x = "Date",
+    y = "Total Cases Per 100K"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+```
+
+Now, we can see that it matches the general trend for COVID-19 cases per state and region, with fluctuations. 
+```{r}
+ggplot(dat |> 
+  mutate(
+    case_rate = (cases / population) * 100000
+  ), 
+  aes(x = date, y = case_rate, group = state, color = region_name)) +
+  geom_line() +
+  labs(
+    title = "Trends for COVID-19 Cases Based on State and Region",
+    x = "Date", 
+    y = "Case Rate per 100,000 People",
+    color = "Region"
+  ) +
+  theme_minimal()
+```
