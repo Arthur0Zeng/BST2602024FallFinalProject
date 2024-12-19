@@ -86,11 +86,10 @@ cases_raw <- cases_raw |>
   mutate(cases = as.numeric(cases), date = ymd(as.Date(date)))
 
 cases <- cases_raw |>
-  filter(year(date) %in% c(2020, 2021)) |>
-  left_join(population |> filter(year %in% c(2020, 2021)), by = c("state" = "state")) |>
+  filter(year(date) %in% c(2020, 2021, 2022, 2023)) |>
+  left_join(population |> filter(year %in% c(2020, 2021, 2022, 2023)), by = c("state" = "state")) |>
   mutate(cases_per_100k = (cases / population) * 100000) |>
   drop_na(cases_per_100k)
 
 cases
 ```
-
