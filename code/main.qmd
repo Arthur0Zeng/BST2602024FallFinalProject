@@ -11,6 +11,8 @@ library(tidyverse)
 library(janitor)
 library(jsonlite)
 library(purrr)
+library(dplyr)
+library(lubridate)
 
 source("census_key.R")
 ```
@@ -33,10 +35,15 @@ population <- population |>
   row_to_names(1) |>
   as_tibble() |>
   select(-state) |>
-  rename(state_name = NAME) |>
+  rename(state_name = NAME) 
+# read estimated data from CENSUS
+estpop <- read.csv(file = "../data/EstimatedPopulation.csv")
+
+# joint estimated data with actual data
+population <- population|> left_join(estpop, by = "state_name") |>
+  mutate(across(-state_name, as.numeric)) |>
   pivot_longer(-state_name, names_to = "year", values_to = "population") |>
   mutate(year = str_remove(year, "POP_")) |>
-  mutate(across(-state_name, as.numeric)) |>
   mutate(state = case_when(
     state_name == "District of Columbia" ~ "DC",
     state_name == "Puerto Rico" ~ "PR",
