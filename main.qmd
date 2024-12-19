@@ -1,0 +1,89 @@
+---
+title: Problem set 4
+date: 2024-10-04
+format: html
+---
+
+Import the necessary libraries. 
+```{r}
+library(httr2)
+library(tidyverse)
+library(janitor)
+library(jsonlite)
+library(purrr)
+
+source("census_key.R")
+```
+
+Let us set up the environment. 
+
+First, let us load in and clean population.
+```{r}
+url <- "https://api.census.gov/data/2021/pep/population"
+request <- request(url) |> req_url_query(get = I("POP_2020,POP_2021,NAME"),
+                                         'for' = I("state:*"),
+                                         key = census_key)
+
+response <- request |> req_perform()
+resp_status(response)
+resp_content_type(response)
+
+population <- response |> resp_body_json(simplifyVector = TRUE)
+population <- population |>
+  row_to_names(1) |>
+  as_tibble() |>
+  select(-state) |>
+  rename(state_name = NAME) |>
+  pivot_longer(-state_name, names_to = "year", values_to = "population") |>
+  mutate(year = str_remove(year, "POP_")) |>
+  mutate(across(-state_name, as.numeric)) |>
+  mutate(state = case_when(
+    state_name == "District of Columbia" ~ "DC",
+    state_name == "Puerto Rico" ~ "PR",
+    TRUE ~ state.abb[match(state_name, state.name)]
+  ))
+head(population,2)
+```
+
+Next, let us load in regions. 
+```{r}
+url <- "https://github.com/datasciencelabs/2024/raw/refs/heads/main/data/regions.json"
+dat <- fromJSON(url, simplifyDataFrame = FALSE)
+
+regions <- map_df(dat, function(x) {
+  region_name <- ifelse(x$region_name == "New York and New Jersey, Puerto Rico, Virgin Islands", 
+                        "NY, NJ, PR, VI", 
+                        x$region_name)
+  data.frame(region = x$region, region_name = region_name, state_name = x$states)
+})
+
+head(regions,2)
+```
+
+Merge region to population. 
+```{r}
+population <- population |> left_join(regions, by = "state_name")
+head(population)
+```
+
+Now, let us load in the COVID cases. Let us combine it with the new population dataset. 
+```{r}
+api <- "https://data.cdc.gov/resource/pwn4-m3yp.json"
+  cases_raw <- request(api) |> 
+  req_url_query('$limit'=1000000000) |>
+  req_perform() |>
+  resp_body_json(simplifyVector = TRUE)
+
+cases_raw <- cases_raw |>
+  select(state, date = end_date, cases = new_cases) |>
+  mutate(cases = as.numeric(cases), date = ymd(as.Date(date)))
+
+cases <- cases_raw |>
+  filter(year(date) %in% c(2020, 2021)) |>
+  left_join(population |> filter(year %in% c(2020, 2021)), by = c("state" = "state")) |>
+  mutate(cases_per_100k = (cases / population) * 100000) |>
+  drop_na(cases_per_100k)
+
+cases
+```
+
