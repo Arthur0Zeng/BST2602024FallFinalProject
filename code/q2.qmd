@@ -1,0 +1,63 @@
+Import the necessary libraries. 
+```{r}
+library(httr2)
+library(tidyverse)
+library(janitor)
+library(jsonlite)
+library(purrr)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+```
+
+Load in the dataset. 
+```{r}
+load("WrangledData.rdata")
+dat <- get("dat")
+head(dat)
+```
+
+```{r}
+death_rate <- dat %>%
+  mutate(death_rate = (deaths / population) * 100000) %>%
+  group_by(state, mmwr_year, mmwr_week) %>%
+  summarize(death_rate = sum(death_rate, na.rm = TRUE), .groups = "drop")
+
+head(death_rate)
+```
+
+```{r}
+ggplot(dat |> 
+  mutate(
+    death_rate = (deaths / population) * 100000
+  ), 
+  aes(x = date, y = death_rate, group = state, color = region_name)) +
+  geom_line() +
+  labs(
+    title = "Trends for COVID-19 Death Rates Based on State and Region",
+    x = "Date", 
+    y = "Death Rate per 100,000 People",
+    color = "Region"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+summary_table <- dat |>
+  mutate(
+    death_rate = (deaths / population) * 100000
+  ) |>
+  group_by(mmwr_year, state) |>
+  summarize(
+    avg_death_rate = mean(death_rate, na.rm = TRUE),
+    total_deaths = sum(deaths, na.rm = TRUE),
+    total_population = sum(population, na.rm = TRUE)
+  ) |>
+  ungroup()
+
+head(summary_table)
+```
+
+```{r}
+print(summary_table |> arrange(desc(avg_death_rate)))
+```
