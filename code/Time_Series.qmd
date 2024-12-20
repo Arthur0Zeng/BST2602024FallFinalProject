@@ -1,0 +1,54 @@
+---
+title: "Time Series"
+format: html
+editor: Xu Han
+---
+
+## 
+
+```{r}
+library(forecast)
+library(dplyr)
+
+data <- read.csv("TimeSeries_1.csv")
+
+data_cleaned <- data %>%
+  select(Jurisdiction.of.Occurrence, MMWR.Year, MMWR.Week, All..Cause) %>%
+  rename(State = Jurisdiction.of.Occurrence, Year = MMWR.Year, Week = MMWR.Week, Deaths = All..Cause) %>%
+  filter(!is.na(Deaths)) %>%
+  mutate(Deaths = as.numeric(Deaths))
+
+forecast_by_state <- function(state_data, state_name) {
+  # time series object
+  ts_data <- ts(state_data$Deaths, start = c(min(state_data$Year), min(state_data$Week)), frequency = 52)
+  
+  # ARIMA model
+  fit <- auto.arima(ts_data)
+  
+  # Forecast for the next 4 years (208 weeks)
+  forecasted <- forecast(fit, h = 208)
+  
+  start_year <- max(state_data$Year)
+  start_week <- max(state_data$Week)
+  
+  forecast_results <- data.frame(
+    State = state_name,
+    Year = rep((start_year + 1):(start_year + 4), each = 52),
+    Week = rep(1:52, 4),
+    Predicted_Deaths = forecasted$mean
+  )
+  
+  return(forecast_results)
+}
+
+# each state
+forecast_results <- data_cleaned %>%
+  group_by(State) %>%
+  group_split() %>%
+  lapply(function(state_data) forecast_by_state(state_data, unique(state_data$State))) %>%
+  bind_rows()
+
+write.csv(forecast_results, "Predicted_Deaths_2020_2023_1.csv", row.names = FALSE)
+head(forecast_results)
+
+```
