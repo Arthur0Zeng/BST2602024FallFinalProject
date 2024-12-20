@@ -10,7 +10,13 @@ format: pdf
 
 # Introduction
 
-...
+The COVID-19 pandemic has deeply impacted global health and mortality, displaying some vulnerabilities in healthcare systems worldwide. Official statistics report millions of deaths, but evidence suggests the actual toll is 1.6 times higher than reported due to underreporting and the indirect effects of the pandemic (Karlinsky & Kobak, 2021; Shang et al., 2022). Excess mortality, the difference between observed and expected deaths, has become a critical measure for understanding the pandemic’s full impact. This metric includes both direct effects, such as deaths caused by the virus, and indirect consequences, like delayed medical care and strained healthcare systems (Kung et al., 2020). By offering a comprehensive view, excess mortality can guide public health policies and improve preparedness for future crises (Araja, 2022; Bech et al., 2021).
+
+Globally, the impact of COVID-19 on mortality has varied. Some regions, like South America and parts of Asia, experienced high excess mortality due to severe outbreaks and healthcare challenges (Shang et al., 2022). In contrast, other areas saw reductions in non-COVID deaths, as measures like lockdowns limited the spread of other infectious diseases (Karlinsky & Kobak, 2021). In the United States, the pandemic showed significant health disparities. African American and Hispanic communities suffered disproportionately high death rates, largely due to structural inequalities like limited healthcare access and economic barriers (Siegel et al., 2021; Goldstein & Atherwood, 2020). These inequities underscore the importance of state-level analyses to identify patterns and develop equitable health interventions (Kung et al., 2020).
+
+Evidence suggests that COVID-19 became less severe over time in some populations. For instance, by early 2022, case-hospitalization rates had decreased by 90% in locations like Spain and Boston compared to the start of the pandemic (Amer et al., 2022). Similarly, Massachusetts healthcare workers experienced fewer severe complications after April 2020 (Lan et al., 2020). Nationwide U.S. data from April 2020 to April 2021 showed that severe cases were a minority of hospital admissions, with their proportion decreasing over time (Whitfield et al., 2021). However, these improvements were not evenly distributed. Vulnerable groups, including racial and ethnic minorities, older adults, and socioeconomically disadvantaged populations, continued to experience higher rates of severe illness and death (Bergmann et al., 2022). This emphasizes the need to study changes in COVID-19 severity across different waves and populations to introduce adaptive public health strategies.
+
+This study aims to analyze mortality trends in the United States from January 2020 to December 2024. Using daily and weekly mortality data, it will divide the pandemic into distinct waves based on trends observed through data visualizations. For each wave, the study will show the calculation of state-level death rates to identify which states were most and least affected. It will also assess whether COVID-19 became less severe over time by examining hospitalization and death rates. Additionally, this study will estimate weekly excess mortality for each state and evaluate how much of it can be attributed to COVID-19 deaths. By exploring both COVID-19-related and unrelated mortality, this study seeks to provide a clearer picture of the pandemic’s full impact. Through careful analysis and visualization, the study's findings aim to inform public health strategies and improve readiness for future health emergencies (Ramírez-Soto & Ortega-Cáceres, 2022; Stokes et al., 2021).
 
 # Methods
 
@@ -33,3 +39,8 @@ The virulence of COVID-19 appeared to decrease over time, as evidenced by Figure
 ![](/docs/death_by_state.png) Figure 2
 
 ![](/docs/stacked.png) Figure 3
+
+# Discussion
+
+
+# Reference
