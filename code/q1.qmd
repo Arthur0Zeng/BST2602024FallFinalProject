@@ -40,7 +40,7 @@ head(us_cases,2)
 
 Plot the total COVID-19 cases by month/year in the US. 
 ```{r}
-ggplot(us_cases, aes(x = date, y = cases_per_100k)) +
+plot <- ggplot(us_cases, aes(x = date, y = cases_per_100k)) +
   geom_line() +
   labs(
     title = "Total COVID-19 Cases by Month in the US",
@@ -51,21 +51,39 @@ ggplot(us_cases, aes(x = date, y = cases_per_100k)) +
   theme(
     plot.title = element_text(hjust = 0.5)
   )
+
+ggsave("total_covid_us.png", plot = plot, width = 20, height = 12, dpi = 300)
 ```
 
-Now, we can see that it matches the general trend for COVID-19 cases per state and region, with fluctuations. 
+Now, we can see that it matches the general trend for COVID-19 cases and the deaths per state and region, with fluctuations. 
 ```{r}
-ggplot(dat |> 
+dat_long <- dat |>
   mutate(
-    case_rate = (cases / population) * 100000
-  ), 
-  aes(x = date, y = case_rate, group = state, color = region_name)) +
+    case_rate = (cases / population) * 100000,
+    death_rate = (deaths / population) * 100000
+  ) |>
+  pivot_longer(
+    cols = c(case_rate, death_rate),
+    names_to = "rate_type",
+    values_to = "rate"
+  )
+
+plot2 <- ggplot(dat_long, aes(x = date, y = rate, group = state, color = region_name)) +
   geom_line() +
+  facet_wrap(~rate_type, scales = "free_y", ncol = 1) +
   labs(
-    title = "Trends for COVID-19 Cases Based on State and Region",
-    x = "Date", 
-    y = "Case Rate per 100,000 People",
+    title = "Trends for COVID-19 Case and Death Rates",
+    x = "Date",
+    y = "Rate per 100,000 People",
     color = "Region"
   ) +
   theme_minimal()
+
+ggsave("covid_state_region.png", plot = plot2, width = 20, height = 12, dpi = 300)
 ```
+
+Based on the graph above, we have decided to define the following time periods:
+
+1. 2020-01-25 to 2021-02- - initial global outbreak 
+2. 2021-03-01 to 2021-11-30 - Delta variant surge
+3. 2021-12-01 to 2023-04-29 - Omicron wave causing a sharp spike in cases
