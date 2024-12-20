@@ -34,13 +34,12 @@ State-level death rates varied significantly across the defined periods. From Fi
 
 The virulence of COVID-19 appeared to decrease over time, as evidenced by Figure 3. In (1), the vaccination (regular and booster, which has not been available yet) remains to be almost 0; the hospitalization rate increases rapidly in this time period. In (2), the regular series is increasing and people also begin to take booster vaccines; the hospitalization rate is not as high as (1). There is a large peak of hospitalization in (3) but declines quickly, possibly due to high vaccination (including booster) rates. This conclusion can also be explained by a decreasing death rate.
 
-![](/docs/covid_state_region.png) Figure 1
+![](../docs/covid_state_region.png) Figure 1
 
-![](/docs/death_by_state.png) Figure 2
+![](../docs/death_by_state.png) Figure 2
 
-![](/docs/stacked.png) Figure 3
+![](../docs/stacked.png) Figure 3
 
 # Discussion
-
 
 # Reference
