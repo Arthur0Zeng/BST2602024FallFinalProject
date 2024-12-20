@@ -20,3 +20,10 @@ The images were output into doc
 
 ###5###
 Render report.qmd to generate final report
+
+
+###Author###
+Arthur Zeng, Irisa Jin, Alexandra Han
+
+###Special Thanks###
+To Bruce Zhou for his help on fixing the git merge issue on our repo.
