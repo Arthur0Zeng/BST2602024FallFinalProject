@@ -1,0 +1,112 @@
+---
+title: "q4"
+format: html
+editor: visual
+---
+
+Read data
+```{r}
+load("./WrangledData.rdata")
+TS <- read.csv("../data/Predicted_Deaths_2020_2023_1.csv")
+```
+
+Joint two tables
+
+```{r}
+head(dat)
+
+q4 <- dat |> 
+  left_join(TS, by = c("state_name" = "State", "mmwr_year" = "Year", "mmwr_week" = "Week")) |> 
+  mutate(Predicted_Deaths = as.numeric(ceiling(Predicted_Deaths)),
+         total_deaths = as.numeric(total_deaths)) |>
+  mutate(excess_deaths = Predicted_Deaths - total_deaths)
+
+```
+```{r}
+# Scatter plot
+ggplot(q4, aes(x = deaths, y = excess_deaths)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", color = "blue", se = TRUE) +
+  labs(
+    title = "COVID-19 Deaths vs. Excess Deaths",
+    x = "COVID-19 Deaths",
+    y = "Excess Deaths"
+  ) +
+  theme_minimal()
+```
+```{r}
+# Time series plot by week
+ggplot(q4, aes(x = mmwr_week, group = mmwr_year)) +
+  geom_line(aes(y = total_deaths, color = "Total Deaths")) +
+  geom_line(aes(y = Predicted_Deaths, color = "Predicted Deaths")) +
+  labs(
+    title = "Total Deaths and Predicted Deaths Over Time",
+    x = "MMWR Week",
+    y = "Number of Deaths",
+    color = "Legend"
+  ) +
+  facet_wrap(~state_name, scales = "free_y") +
+  theme_minimal()
+
+```
+
+```{r}
+# Run linear regression
+model <- lm(excess_deaths ~ deaths, data = q4)
+
+# Summary of the regression model
+summary(model)
+
+# Plot residuals
+plot(model, which = 1)  # Residual vs Fitted
+plot(model, which = 2)  # Q-Q plot
+```
+
+```{r}
+ggplot(q4, aes(x = state_name, y = excess_deaths)) +
+  geom_boxplot() +
+  labs(
+    title = "Excess Deaths by State",
+    x = "State",
+    y = "Excess Deaths"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+```{r}
+q4 |>
+  group_by(mmwr_year, mmwr_week) |>
+  summarise(
+    total_deaths = sum(total_deaths, na.rm = TRUE),
+    Predicted_Deaths = sum(Predicted_Deaths, na.rm = TRUE),
+    deaths = sum(deaths, na.rm = TRUE)
+  ) |>
+  mutate(predicted_plus_actual = Predicted_Deaths + deaths) |>
+ggplot(aes(x = mmwr_week)) +
+  geom_line(aes(y = Predicted_Deaths, color = "Predicted Deaths"), size = 1) +
+  geom_line(aes(y = total_deaths, color = "Actual Deaths"), size = 1) +
+  geom_ribbon(aes(ymin = Predicted_Deaths, ymax = predicted_plus_actual, fill = "Predicted + Covid Deaths"), alpha = 0.3) +
+  labs(
+    title = "Yearly Comparison of Actual and Predicted Deaths",
+    x = "MMWR Week",
+    y = "Number of Deaths",
+    color = "Legend",
+    fill = "Legend"
+  ) +
+  facet_wrap(~mmwr_year, scales = "free_y") +
+  theme_minimal() +
+  theme(
+    legend.position = "top",
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+
+```
+
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).

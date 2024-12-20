@@ -120,7 +120,7 @@ deaths <- deaths_raw |> filter(state %in% population$state_name) |>
   mutate(deaths = as.numeric(deaths),
          date = as_date(ymd_hms(end_date))) |>
   mutate(mmwr_week = epiweek(date), mmwr_year = epiyear(date)) |>
-  select(mmwr_week, mmwr_year, deaths, state) |>
+  select(mmwr_week, mmwr_year, deaths, state, total_deaths) |>
   filter(!is.na(deaths)) |>
   arrange(state, mmwr_year, mmwr_week)
 
