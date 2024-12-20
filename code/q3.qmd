@@ -1,0 +1,121 @@
+Import the necessary libraries. 
+```{r}
+library(httr2)
+library(tidyverse)
+library(janitor)
+library(jsonlite)
+library(purrr)
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(patchwork)
+```
+
+Load in the dataset. 
+```{r}
+load("WrangledData.rdata")
+dat <- get("dat")
+head(dat)
+```
+
+Next, let us plot a line graph for hospitalization rate each of the time periods. 
+```{r}
+dat <- dat |>
+  mutate(
+    period = case_when(
+      date >= as.Date("2020-01-25") & date <= as.Date("2021-02-28") ~ "2020-01-25 to 2021-02-28",
+      date >= as.Date("2021-03-01") & date <= as.Date("2021-11-30") ~ "2021-03-01 to 2021-11-30",
+      date >= as.Date("2021-12-01") & date <= as.Date("2023-04-29") ~ "2021-12-01 to 2023-04-29",
+      TRUE ~ NA_character_
+    )
+  )
+
+hosp_summary <- dat |>
+  filter(!is.na(period)) |>
+  group_by(period, date) |>
+  summarize(
+    total_hosp = sum(hosp, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+plot1 <-ggplot(hosp_summary, aes(x = date, y = total_hosp, color = period)) +
+  geom_line() +
+  facet_wrap(~ period, scales = "free_x") +
+  labs(
+    title = "Hospitalization Trends by Period",
+    x = "Date",
+    y = "Total Hospitalizations",
+    color = "Period"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(hjust = 0.5),
+    strip.text = element_text(size = 10),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+Now, a line graph for vaccination rate each of the time periods. 
+```{r}
+series_complete_summary <- dat |>
+  filter(!is.na(period)) |>
+  group_by(period, date) |>
+  summarize(
+    total_series_complete = sum(series_complete, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+plot2 <- ggplot(series_complete_summary, aes(x = date, y = total_series_complete, color = period)) +
+  geom_line() +
+  facet_wrap(~ period, scales = "free_x") +
+  labs(
+    title = "Series Complete Trends by Period",
+    x = "Date",
+    y = "Total Vaccinated",
+    color = "Period"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(hjust = 0.5),
+    strip.text = element_text(size = 10),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+Then, a line graph for booster rate each of the time periods. 
+```{r}
+booster_summary <- dat |>
+  filter(!is.na(period)) |>
+  group_by(period, date) |>
+  summarize(
+    total_booster = sum(booster, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+plot3 <- ggplot(booster_summary, aes(x = date, y = total_booster, color = period)) +
+  geom_line() +
+  facet_wrap(~ period, scales = "free_x") +
+  labs(
+    title = "Booster Vaccination Trends by Period",
+    x = "Date",
+    y = "Total Booster Vaccinations",
+    color = "Period"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    plot.title = element_text(hjust = 0.5),
+    strip.text = element_text(size = 10),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+Lastly, let us combine them into one plot. 
+```{r}
+plot <- (plot1 / plot2 / plot3) +
+  plot_layout(guides = "collect") & theme(legend.position = "bottom")
+
+ggsave("stacked.png", plot = plot, width = 16, height = 24, dpi = 300)
+```
