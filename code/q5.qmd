@@ -1,0 +1,118 @@
+---
+title: "q5"
+format: html
+editor: visual
+---
+
+Read data
+
+```{r}
+load("./WrangledData.rdata")
+
+```
+
+Calculate the death rate and save it in death_rate.
+
+```{r}
+excess_death_rate <- q4 |>
+  mutate(death_rate = (excess_deaths / population) * 100000) |>
+  group_by(state, mmwr_year, mmwr_week) |>
+  summarize(death_rate = sum(death_rate, na.rm = TRUE), .groups = "drop")
+
+head(excess_death_rate)
+```
+
+Plot a line graph for each state and region to look at the general trends.
+
+```{r}
+plot <- ggplot(q4 |> 
+  mutate(
+    death_rate = (excess_deaths / population) * 100000
+  ), 
+  aes(x = date, y = death_rate, group = state, color = region_name)) +
+  geom_line() +
+  labs(
+    title = "Trends for COVID-19 Death Rates Based on State and Region",
+    x = "Date", 
+    y = "Death Rate per 100,000 People",
+    color = "Region"
+  ) +
+  theme_minimal()
+
+ggsave("excess_death_line.png", plot = plot, width = 16, height = 6, dpi = 300)
+```
+
+Take a closer look with a summary table of the death rates per state.
+
+```{r}
+summary_table <- q4 |>
+  mutate(
+    excess_death_rate = (excess_deaths / population) * 100000
+  ) |>
+  group_by(mmwr_year, state) |>
+  summarize(
+    avg_death_rate = mean(excess_death_rate, na.rm = TRUE),
+    total_deaths = sum(deaths, na.rm = TRUE),
+    total_population = mean(population, na.rm = TRUE),
+    .groups = "drop") |>
+  ungroup()
+
+print(summary_table |> arrange(desc(avg_death_rate)))
+```
+
+Make a barplot for each of the time periods to see which state had the highest and lowest death rate in that time frame.
+
+```{r}
+q5 <- q4 |>
+  mutate(
+    period = case_when(
+      date >= as.Date("2020-01-25") & date <= as.Date("2021-02-28") ~ "2020-01-25 to 2021-02-28",
+      date >= as.Date("2021-03-01") & date <= as.Date("2021-11-30") ~ "2021-03-01 to 2021-11-30",
+      date >= as.Date("2021-12-01") & date <= as.Date("2023-04-29") ~ "2021-12-01 to 2023-04-29",
+      TRUE ~ NA_character_
+    )
+  )
+
+death_rate_summary <- q5 |>
+  filter(!is.na(period)) |>
+  group_by(state_name, period) |>
+  summarize(
+    excess_death_rate = sum(excess_deaths, na.rm = TRUE) / mean(population, na.rm = TRUE) * 100000,
+    .groups = "drop"
+  )
+
+death_rate_summary <- death_rate_summary |>
+  group_by(period) |>
+  mutate(state_name = reorder_within(state_name, -excess_death_rate, period)) |>
+  ungroup()
+
+plot2 <- ggplot(death_rate_summary, aes(x = state_name, y = excess_death_rate, fill = period)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  facet_wrap(~ period, scales = "free", ncol = 1) +
+  scale_x_reordered() +
+  labs(
+    title = "Excess Death Rate per State by Period",
+    x = "State",
+    y = "Death Rate (per 100,000 People)",
+    fill = "Period"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "bottom",
+    strip.text = element_text(size = 10),
+    axis.text.y = element_text(size = 10),
+    panel.spacing = unit(2, "lines")
+  )
+
+ggsave("excess_death_by_state.png", plot = plot2, width = 8, height = 24, dpi = 300)
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
