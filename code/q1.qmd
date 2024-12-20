@@ -12,7 +12,7 @@ library(ggplot2)
 
 Load in the dataset. 
 ```{r}
-load("WrangledData.rdata")
+load("../data/WrangledData.rdata")
 dat <- get("dat")
 head(dat)
 ```
@@ -52,7 +52,7 @@ plot <- ggplot(us_cases, aes(x = date, y = cases_per_100k)) +
     plot.title = element_text(hjust = 0.5)
   )
 
-ggsave("total_covid_us.png", plot = plot, width = 20, height = 12, dpi = 300)
+ggsave("../docs/total_covid_us.png", plot = plot, width = 20, height = 12, dpi = 300)
 ```
 
 Now, we can see that it matches the general trend for COVID-19 cases and the deaths per state and region, with fluctuations. 
@@ -79,7 +79,7 @@ plot2 <- ggplot(dat_long, aes(x = date, y = rate, group = state, color = region_
   ) +
   theme_minimal()
 
-ggsave("covid_state_region.png", plot = plot2, width = 20, height = 12, dpi = 300)
+ggsave("../docs/covid_state_region.png", plot = plot2, width = 20, height = 12, dpi = 300)
 ```
 
 Based on the graph above, we have decided to define the following time periods:

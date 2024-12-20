@@ -13,7 +13,7 @@ library(ggplot2)
 
 Load in the dataset. 
 ```{r}
-load("WrangledData.rdata")
+load("../data/WrangledData.rdata")
 dat <- get("dat")
 head(dat)
 ```
@@ -43,7 +43,7 @@ plot <- ggplot(dat |>
   ) +
   theme_minimal()
 
-ggsave("death_line.png", plot = plot, width = 16, height = 6, dpi = 300)
+ggsave("../docs/death_line.png", plot = plot, width = 16, height = 6, dpi = 300)
 ```
 
 Take a closer look with a summary table of the death rates per state.
@@ -56,7 +56,7 @@ summary_table <- dat |>
   summarize(
     avg_death_rate = mean(death_rate, na.rm = TRUE),
     total_deaths = sum(deaths, na.rm = TRUE),
-    total_population = sum(population, na.rm = TRUE)
+    total_population = mean(population, na.rm = TRUE)
   ) |>
   ungroup()
 
@@ -79,7 +79,7 @@ death_rate_summary <- dat |>
   filter(!is.na(period)) |>
   group_by(state_name, period) |>
   summarize(
-    death_rate = sum(deaths, na.rm = TRUE) / sum(population, na.rm = TRUE) * 100000,
+    death_rate = sum(deaths, na.rm = TRUE) / mean(population, na.rm = TRUE) * 100000,
     .groups = "drop"
   )
 
@@ -107,7 +107,7 @@ plot2 <- ggplot(death_rate_summary, aes(x = state_name, y = death_rate, fill = p
     panel.spacing = unit(2, "lines")
   )
 
-ggsave("death_by_state.png", plot = plot2, width = 8, height = 24, dpi = 300)
+ggsave("../docs/death_by_state.png", plot = plot2, width = 8, height = 24, dpi = 300)
 ```
 
 

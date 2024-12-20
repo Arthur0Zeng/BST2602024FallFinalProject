@@ -7,7 +7,7 @@ editor: visual
 Read data
 
 ```{r}
-load("./WrangledData.rdata")
+load("../data/WrangledData.rdata")
 
 ```
 
@@ -39,7 +39,7 @@ plot <- ggplot(q4 |>
   ) +
   theme_minimal()
 
-ggsave("excess_death_line.png", plot = plot, width = 16, height = 6, dpi = 300)
+ggsave("../docs/excess_death_line.png", plot = plot, width = 16, height = 6, dpi = 300)
 ```
 
 Take a closer look with a summary table of the death rates per state.
@@ -105,14 +105,5 @@ plot2 <- ggplot(death_rate_summary, aes(x = state_name, y = excess_death_rate, f
     panel.spacing = unit(2, "lines")
   )
 
-ggsave("excess_death_by_state.png", plot = plot2, width = 8, height = 24, dpi = 300)
+ggsave("../docs/excess_death_by_state.png", plot = plot2, width = 8, height = 24, dpi = 300)
 ```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).

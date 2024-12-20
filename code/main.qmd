@@ -158,6 +158,6 @@ dat <- dates_and_pop|>
   left_join(vax, by = c("state", "mmwr_week","mmwr_year")) |>
   arrange(state, mmwr_year, mmwr_week) 
 
-save(dat, file = "WrangledData.rdata")
+save(dat, file = "../data/WrangledData.rdata")
 ```
 
