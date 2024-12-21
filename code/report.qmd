@@ -61,21 +61,21 @@ knitr::kable(temp.mat, caption="Linear Regression Summary")
 
 # Discussion
 
-This study’s analysis of the COVID-19 pandemic in the United States provides valuable insights into the shifting patterns of cases, mortality, and the virus’s overall impact over time. By dividing the pandemic into three major periods—initial outbreak, Delta variant surge, and Omicron wave—this study captured critical temporal and geographic variations, along with changes in the COVID-19's virulence. These findings align with existing research while offering new opinions on public health strategies.
+The analysis of the COVID-19 pandemic in the U.S. provides valuable insights into the shifting patterns of cases, mortality, and impact over time. By dividing the pandemic into three major periods—initial outbreak, Delta variant surge, and Omicron wave—this study captured critical temporal and geographic variations, along with changes in the COVID-19's virulence. These findings align with existing research while offering new opinions on public health strategies.
 
 **Temporal Trends and Pandemic Waves**
 
-Dividing the pandemic into three waves revealed how the challenges posed by COVID-19 evolved. The initial outbreak was noticed by steep increases in both cases and mortality. This reflects a lack of preparedness and natural immunity early in the pandemic. This phase indicated significant stress on healthcare systems nationwide. And it had broader observations of overwhelmed resources and elevated mortality rates during the first months of the pandemic.
+Dividing the pandemic into three waves revealed how the challenges posed by COVID-19 evolved. The initial outbreak was noticed by steep increases in both cases and mortality. This reflects a lack of preparedness and natural immunity early in the pandemic. This phase indicated significant stress on healthcare systems nationwide. It had broader observations of overwhelmed resources and elevated mortality rates during the first months of the pandemic.
 
-The Delta variant surge maintained high mortality rates, which emphasizes variant’s increased virulence compared to the original strain. This finding aligns with existing research showing higher hospitalization and mortality rates during Delta than in other phases of the pandemic (Li et al., 2023). In contrast, the Omicron wave brought a record surge in cases but a comparatively smaller rise in mortality. This trend reflects the widespread impact of vaccination and improved treatments, which were critical in mitigating severe outcomes despite higher transmission rates (Lin et al., 2022). Vaccination campaigns likely reduced mortality by up to 70% during the Delta wave, displaying their importance in changing the trajectory of the pandemic.
+The Delta variant surge maintained high mortality rates, emphasizing variant’s increased virulence compared to the original strain. This finding aligns with existing research showing higher hospitalization and mortality rates during Delta than in other phases of the pandemic (Li et al., 2023). In contrast, the Omicron wave brought a record surge in cases but a comparatively smaller rise in mortality. This trend reflects the widespread impact of vaccination and improved treatments, which were critical in mitigating severe outcomes despite higher transmission rates (Lin et al., 2022). Vaccination campaigns likely reduced mortality by up to 70% during the Delta wave, displaying their importance in changing the trajectory of the pandemic.
 
-These patterns explain how targeted public health interventions, such as timely vaccine rollouts, can influence pandemic outcomes. However, they also emphasize that a uniform strategy may not be enough because distinct waves presented different challenges across time and regions.
+These patterns explain how targeted public health interventions can influence pandemic outcomes. However, they also emphasize that a uniform strategy may not be enough because distinct waves presented different challenges across time and regions.
 
 **Geographic and State-Level Variations**
 
-Significant disparities in mortality rates across states persisted throughout the pandemic. States such as West Virginia and Kentucky consistently reported higher mortality rates, while Vermont and Hawaii maintained the lowest rates. This disparity reflects a range of factors, including population density, healthcare capacity, and demographic vulnerabilities. For instance, Vermont’s lower population density likely reduced transmission risks, while states with weaker healthcare systems faced greater difficulties managing surges.
+Significant disparities in mortality rates across states persisted throughout the pandemic. States such as West Virginia and Kentucky consistently reported higher mortality rates, while Vermont and Hawaii maintained the lowest rates. This disparity reflects a range of factors, including population density and healthcare capacity. For instance, Vermont’s lower population density likely reduced transmission risks, while states with weaker healthcare systems faced greater difficulties managing surges.
 
-Additionally, structural inequities, such as systemic racism, further exacerbated these disparities. Black and Hispanic populations faced disproportionately high mortality rates, even after adjusting for other factors (Goldstein & Atherwood, 2020; Sehra et al., 2020). These findings indicate the need for targeted interventions to address underlying systemic inequities, such as expanding healthcare access and addressing socioeconomic barriers in vulnerable communities.
+Additionally, structural inequities, such as systemic racism, further exacerbated these disparities. Black and Hispanic populations faced disproportionately high mortality rates, even after adjusting for other factors (Goldstein & Atherwood, 2020; Sehra et al., 2020). These findings indicate the need for targeted interventions to address underlying inequities, such as expanding healthcare access.
 
 **Declining Virulence Over Time**
 
@@ -85,17 +85,17 @@ Although some models have suggested that imperfect vaccines could drive the evol
 
 **Excess Mortality and COVID-19 Mortality**
 
-The statistical analysis (Table 1) shows an extremely strong and statistically significant relationship between COVID-19 mortality and excess mortality, as evidenced by low p-values and high adjusted R-squared values. This result supports the hypothesis that COVID-19 mortality is closely connected with the gap between estimated and observed mortality. In other words, COVID-19 mortality aligns well with the "excess mortality" observed during the pandemic.
+The statistical analysis (Table 1) shows an extremely strong and statistically significant relationship between COVID-19 mortality and excess mortality, as evidenced by low p-values and high adjusted R-squared values. This result supports the hypothesis that COVID-19 mortality is closely connected with the gap between estimated and observed mortality. In other words, COVID-19 mortality aligns well with the "excess mortality" observed.
 
 Figure 4 visually supports this conclusion. The pink shaded area represents COVID-19 mortality, while the green line indicates estimated mortality under non-pandemic conditions. The actual mortality (red line) consistently exceeds the estimated mortality, and the difference aligns closely with COVID-19 mortality. This alignment indicates that COVID-19 mortality explains much of the observed excess mortality, which validates the regression results.
 
-The model’s explanatory power weakened in 2023 due to the pandemic’s decline and reduced reporting accuracy. Additionally, data discrepancies in early 2020, due to missing values in major states' total mortality records in CDC data, introduced uncertainty. For example, incomplete data led to artificially low estimates in certain periods, explaining the discrepancies observed during the early stages of the pandemic.
+The model’s explanatory power weakened in 2023 due to the pandemic’s decline and reduced reporting accuracy. Additionally, data discrepancies in early 2020, due to missing values in major states' total mortality records in CDC data, introduced uncertainty. For example, incomplete data led to artificially low estimates in certain periods, explaining the discrepancies observed during the early stages of COVID-19.
 
 **Implications for Policy and Future Research**
 
-The findings from this study emphasize the need for sustained public health efforts to address disparities and enhance preparedness for future pandemics. Policies must prioritize vulnerable populations and regions with limited healthcare resources. Integrating vaccination campaigns with public education, equitable resource distribution, and expanded healthcare access is essential to address these challenges effectively.
+The findings from this study emphasize the need for sustained public health efforts to address disparities and enhance preparedness for future pandemics. Policies must prioritize vulnerable populations and regions with limited healthcare resources. Integrating vaccination campaigns with equitable resource distribution and expanded healthcare access is essential to address these challenges effectively.
 
-Future research should delve deeper into the interplay between demographic factors, healthcare access, and policy interventions. Granular analyses, such as county-level studies, could provide more localized insights into urban-rural disparities and specific vulnerabilities. Additionally, long-term research on immunity and the effectiveness of multivalent vaccines will be critical for shaping strategies to combat emerging variants in future pandemics.
+Future research should delve deeper into the interplay between demographic factors and healthcare access. Granular analyses could provide more localized insights into urban-rural disparities and specific vulnerabilities. Long-term research on immunity and the effectiveness of multivalent vaccines will be critical for shaping strategies to combat emerging variants in future pandemics.
 
 **Limitations**
 
@@ -103,7 +103,7 @@ This study offers a comprehensive analysis of COVID-19 trends but has notable li
 
 **Conclusion**
 
-In conclusion, this study emphasizes the dynamic nature of the COVID-19 pandemic, with significant variations across time, geography, and population groups. Vaccination campaigns were instrumental in reducing mortality and reducing the virus’s impact, but persistent disparities reveal the need for targeted public health interventions. By addressing systemic inequities and enhancing preparedness, a more equitable and effective healthcare system capable of responding to future health crises can be built.
+In conclusion, this study emphasizes the dynamic nature of the COVID-19 pandemic, with significant variations across time, geography, and population groups. Vaccination campaigns were instrumental in reducing mortality and reducing the virus’s impact, but persistent disparities reveal the need for public health interventions. By addressing systemic inequities and enhancing preparedness, a more equitable and effective healthcare system capable of responding to future health crises can be built.
 
 \newpage
 
