@@ -46,7 +46,7 @@ State-level excess death rates varied significantly across the defined periods. 
 
 ![COVID of State and Region](../docs/covid_state_region.png){fig-align="center"}
 
-![COVID and Excess Death by State](images/excess_death_by_state.png){fig-align="center"}
+![COVID and Excess Death by State](../docs/excess_death_by_state.png){fig-align="center"}
 
 ![Hospitalization & Series Complete & Booster](../docs/stacked.png){fig-align="center"}
 
