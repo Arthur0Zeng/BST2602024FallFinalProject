@@ -1,5 +1,5 @@
 ---
-title: "BST 260 Report"
+title: "COVID-19 Pandemic in the US"
 author: "Irisa Jin, Xu Han, Cenjia Zeng"
 format: 
   pdf:
@@ -106,5 +106,5 @@ This study offers a comprehensive analysis of COVID-19 trends but has notable li
 In conclusion, this study emphasizes the dynamic nature of the COVID-19 pandemic, with significant variations across time, geography, and population groups. Vaccination campaigns were instrumental in reducing mortality and reducing the virus’s impact, but persistent disparities reveal the need for targeted public health interventions. By addressing systemic inequities and enhancing preparedness, we can build a more equitable and effective healthcare system capable of responding to future health crises.
 
 \newpage
-# References
 
+# References
