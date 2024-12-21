@@ -6,7 +6,7 @@ format: pdf
 
 # Abstract
 
-...
+This study focuses on the COVID-19 pandemic’s impact in the United States from January 2020 to December 2024, especially on temporal and geographic mortality patterns, changes in the virus’s virulence, and the relationship between COVID-19 mortality and excess mortality. The pandemic was divided into three distinct periods—the initial outbreak, the Delta variant surge, and the Omicron wave—based on visualized trends in cases and mortality. State-level mortality rates were computed for each period, which identifies states that performed better or worse in managing the pandemic. Trends in hospitalization and mortality rates were analyzed across the three periods to evaluate changes in virulence. The Delta variant exhibited higher virulence with elevated mortality rates, while the Omicron wave showed reduced severity due to widespread vaccination and improved treatments. Excess mortality was estimated weekly for each state, comparing observed and estimated mortality trends. Regression analysis revealed a strong and statistically significant relationship between COVID-19 mortality and excess mortality, further validated through visual alignments. However, discrepancies in early data and underreporting in later stages introduced uncertainties. This analysis emphasizes the importance of vaccination campaigns, targeted public health interventions, and addressing systemic inequities. These findings provide valuable suggestions to improve pandemic preparedness and reduce disparities in future health crises.
 
 # Introduction
 
@@ -55,7 +55,6 @@ Figure 2
 Figure 4
 
 ![](../docs/table1.jpg){fig-align="center" width="500"}
-
 
 # Discussion
 
