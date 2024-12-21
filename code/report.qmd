@@ -5,6 +5,7 @@ format: pdf
 bibliography: references.bib
 nocite: "@*"
 ---
+
 # Abstract
 
 This study focuses on the COVID-19 pandemic’s impact in the United States from January 2020 to December 2024, especially on temporal and geographic mortality patterns, changes in the virus’s virulence, and the relationship between COVID-19 mortality and excess mortality. The pandemic was divided into three distinct periods—the initial outbreak, the Delta variant surge, and the Omicron wave—based on visualized trends in cases and mortality. State-level mortality rates were computed for each period, which identifies states that performed better or worse in managing the pandemic. Trends in hospitalization and mortality rates were analyzed across the three periods to evaluate changes in virulence. The Delta variant exhibited higher virulence with elevated mortality rates, while the Omicron wave showed reduced severity due to widespread vaccination and improved treatments. Excess mortality was estimated weekly for each state, comparing observed and estimated mortality trends. Regression analysis revealed a strong and statistically significant relationship between COVID-19 mortality and excess mortality, further validated through visual alignments. However, discrepancies in early data and under reporting in later stages introduced uncertainties. This analysis emphasizes the importance of vaccination campaigns, targeted public health interventions, and addressing systemic inequities. These findings provide valuable suggestions to improve pandemic preparedness and reduce disparities in future health crises.
@@ -78,7 +79,7 @@ Additionally, structural inequities, such as systemic racism, further exacerbate
 
 **Declining Virulence Over Time**
 
-Trends in hospitalization and mortality rates suggest COVID-19 became less virulent over time. The significant reduction in mortality rates during the Omicron wave reflects the success of vaccination campaigns in preventing severe outcomes. These findings are consistent with research indicating that vaccines effectively reduce disease severity and hospitalization rates, even with emerging variants (Lin et al., 2022). However, vaccines were less effective at preventing transmission. This emphasizes the importance of developing updated vaccines tailored to new variants (Krause et al., 2021).
+Trends in hospitalization and mortality rates suggest COVID-19 became less virulent over time. While virulence declined during the Omicron wave, state-level disparities persisted due to localized healthcare challenges and vulnerabilities. These findings are consistent with research indicating that vaccines effectively reduce disease severity and hospitalization rates, even with emerging variants (Lin et al., 2022). However, vaccines were less effective at preventing transmission. This emphasizes the importance of developing updated vaccines tailored to new variants (Krause et al., 2021).
 
 Although some models have suggested that imperfect vaccines could drive the evolution of more severe strains (Gandon et al., 2001), current evidence indicates that COVID-19 vaccines have played a key role in transitioning the virus toward endemicity. Studies have shown that over time, immunity gained from vaccination and previous infections has contributed to the decreasing severity of COVID-19 cases (Lavine et al., 2021).
 
@@ -88,7 +89,7 @@ The statistical analysis (Table 1) shows an extremely strong and statistically s
 
 Figure 4 visually supports this conclusion. The pink shaded area represents COVID-19 mortality, while the green line indicates estimated mortality under non-pandemic conditions. The actual mortality (red line) consistently exceeds the estimated mortality, and the difference aligns closely with COVID-19 mortality. This alignment indicates that COVID-19 mortality explains much of the observed excess mortality, which validates the regression results.
 
-However, the model’s fit deteriorates in 2023 as the pandemic subsided, reducing COVID-19’s impact on overall mortality and weakening the direct relationship between COVID-19 and excess mortality. Additionally, data discrepancies in early 2020, due to missing values in major states' total mortality records in CDC data, introduced uncertainty. For example, incomplete data led to artificially low estimates in certain periods, explaining the discrepancies observed during the early stages of the pandemic.
+The model’s explanatory power weakened in 2023 due to the pandemic’s decline and reduced reporting accuracy. Additionally, data discrepancies in early 2020, due to missing values in major states' total mortality records in CDC data, introduced uncertainty. For example, incomplete data led to artificially low estimates in certain periods, explaining the discrepancies observed during the early stages of the pandemic.
 
 **Implications for Policy and Future Research**
 
@@ -98,7 +99,7 @@ Future research should delve deeper into the interplay between demographic facto
 
 **Limitations**
 
-This study offers a comprehensive analysis of COVID-19 trends but has notable limitations. First, missing CDC data from early 2020, particularly in major states, introduced extreme outliers, complicating accurate estimates of excess mortality. Second, as the pandemic waned in 2023, underreporting likely increased as unrecognized or unreported COVID-19 cases reduced the accuracy of mortality data, weakening the observed link between COVID-19 and excess mortality. Finally, while the linear regression model satisfied key assumptions (LINE), Q-Q plots revealed deviations at the tails, indicating difficulty in capturing extreme values and potentially affecting the robustness of conclusions in outlier states.
+This study offers a comprehensive analysis of COVID-19 trends but has notable limitations. First, missing CDC data from early 2020, particularly in major states, introduced extreme outliers, complicating accurate estimates of excess mortality. Second, in later stages, underreporting weakened the observed relationship between COVID-19 mortality and excess mortality, as fewer cases were recognized or reported. The regression model explained strong overall relationships, though deviations at Q-Q plot tails indicate challenges with extreme values in outlier states.
 
 **Conclusion**
 
