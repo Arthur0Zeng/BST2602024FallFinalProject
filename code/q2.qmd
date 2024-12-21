@@ -43,7 +43,7 @@ plot <- ggplot(dat |>
   ) +
   theme_minimal()
 
-ggsave("../docs/death_line.png", plot = plot, width = 16, height = 6, dpi = 300)
+ggsave("../docs/death_line.png", plot = plot, width = 8, height = 3, dpi = 100)
 ```
 
 Take a closer look with a summary table of the death rates per state.
@@ -88,7 +88,7 @@ death_rate_summary <- death_rate_summary |>
   mutate(state_name = reorder_within(state_name, -death_rate, period)) |>
   ungroup()
 
-plot2 <- ggplot(death_rate_summary, aes(x = state_name, y = death_rate, fill = period)) +
+plot2_2 <- ggplot(death_rate_summary, aes(x = state_name, y = death_rate, fill = period)) +
   geom_bar(stat = "identity") +
   coord_flip() +
   facet_wrap(~ period, scales = "free", ncol = 1) +
@@ -107,7 +107,7 @@ plot2 <- ggplot(death_rate_summary, aes(x = state_name, y = death_rate, fill = p
     panel.spacing = unit(2, "lines")
   )
 
-ggsave("../docs/death_by_state.png", plot = plot2, width = 8, height = 24, dpi = 300)
+ggsave("../docs/death_by_state.png", plot = plot2_2, width = 8, height = 24, dpi = 100)
 ```
 
 
