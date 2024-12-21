@@ -1,12 +1,16 @@
 ---
 title: "BST 260 Report"
 author: "Irisa Jin, Xu Han, Cenjia Zeng"
-format: pdf
+format: 
+  pdf:
+    fig-numbering: false
+bibliography: references.bib
+nocite: "@*"
 ---
 
 # Abstract
 
-This study focuses on the COVID-19 pandemic’s impact in the United States from January 2020 to December 2024, especially on temporal and geographic mortality patterns, changes in the virus’s virulence, and the relationship between COVID-19 mortality and excess mortality. The pandemic was divided into three distinct periods—the initial outbreak, the Delta variant surge, and the Omicron wave—based on visualized trends in cases and mortality. State-level mortality rates were computed for each period, which identifies states that performed better or worse in managing the pandemic. Trends in hospitalization and mortality rates were analyzed across the three periods to evaluate changes in virulence. The Delta variant exhibited higher virulence with elevated mortality rates, while the Omicron wave showed reduced severity due to widespread vaccination and improved treatments. Excess mortality was estimated weekly for each state, comparing observed and estimated mortality trends. Regression analysis revealed a strong and statistically significant relationship between COVID-19 mortality and excess mortality, further validated through visual alignments. However, discrepancies in early data and underreporting in later stages introduced uncertainties. This analysis emphasizes the importance of vaccination campaigns, targeted public health interventions, and addressing systemic inequities. These findings provide valuable suggestions to improve pandemic preparedness and reduce disparities in future health crises.
+This study focuses on the COVID-19 pandemic’s impact in the United States from January 2020 to December 2024, especially on temporal and geographic mortality patterns, changes in the virus’s virulence, and the relationship between COVID-19 mortality and excess mortality. The pandemic was divided into three distinct periods—the initial outbreak, the Delta variant surge, and the Omicron wave—based on visualized trends in cases and mortality. State-level mortality rates were computed for each period, which identifies states that performed better or worse in managing the pandemic. Trends in hospitalization and mortality rates were analyzed across the three periods to evaluate changes in virulence. The Delta variant exhibited higher virulence with elevated mortality rates, while the Omicron wave showed reduced severity due to widespread vaccination and improved treatments. Excess mortality was estimated weekly for each state, comparing observed and estimated mortality trends. Regression analysis revealed a strong and statistically significant relationship between COVID-19 mortality and excess mortality, further validated through visual alignments. However, discrepancies in early data and under reporting in later stages introduced uncertainties. This analysis emphasizes the importance of vaccination campaigns, targeted public health interventions, and addressing systemic inequities. These findings provide valuable suggestions to improve pandemic preparedness and reduce disparities in future health crises.
 
 # Introduction
 
@@ -38,23 +42,22 @@ The virulence of COVID-19 appeared to decrease over time, as evidenced by Figure
 
 The time series analysis produced estimated data for 2020 - 2023 as expected. The result from linear regression is shown in Table 1. From the result, the excess mortality can be explained by the COVID pandemic. The LINE assumptions check passed by checking Q-Q plot and residual plot. A scatterplot was used to more clearly depict the relationship between the variables. It can be seen in the scatterplot that the dots form a straight line. In the Figure 4, it can also be seen that when COVID mortality was added to the actual mortality, it was very close to the estimated mortality, especially in 2020 - 2022. 
 
-State-level excess death rates varied significantly across the defined periods. A more negative excess mortality rate represents a larger rate. From Figure 4, it can be clearly seen that in period (1), states like Mississippi, Arizona, and Louisiana reported the highest excess death rates, with Vermont and Hawaii at the lowest death rates. During the (2) phase, West Virginia, Florida, and Montana experienced the highest excess death rates, while Massachusetts, District of Columbias and Minnesota showed the lowest excess death rates. In (3) time period, West Virginia, New Mexico, and Puerto Rico had the highest death rates, while District of Columbia, New Jersey, and Minnesota had the lowest death rates. Unlike results found for question two, no states remained having consistently the lowest death rate.
+State-level excess death rates varied significantly across the defined periods. A more negative excess mortality rate represents a larger rate. From Figure 2, it can be clearly seen that in period (1), states like Mississippi, Arizona, and Louisiana reported the highest excess death rates, with Vermont and Hawaii at the lowest death rates. During the (2) phase, West Virginia, Florida, and Montana experienced the highest excess death rates, while Massachusetts, District of Columbias and Minnesota showed the lowest excess death rates. In (3) time period, West Virginia, New Mexico, and Puerto Rico had the highest death rates, while District of Columbia, New Jersey, and Minnesota had the lowest death rates. Unlike results found for question two, no states remained having consistently the lowest death rate.
 
-![](../docs/covid_state_region.png)
+![COVID of State and Region](../docs/covid_state_region.png){fig-align="center"}
 
-Figure 1
+![COVID and Excess Death by State](images/excess_death_by_state.png){fig-align="center"}
 
-![](../docs/death_by_state.png)
+![Hospitalization & Series Complete & Booster](../docs/stacked.png){fig-align="center"}
 
-Figure 2
+![Line Chart: Yearly Comparison](../docs/yearly_comparison_of_actual_and_predicted_deaths.png){fig-align="center"}
 
-![](../docs/stacked.png) Figure 3
-
-![](../docs/yearly_comparison_of_actual_and_predicted_deaths.png){fig-align="center"}
-
-Figure 4
-
-![](../docs/table1.jpg){fig-align="center" width="500"}
+```{r echo=F, warning=F}
+temp.df <- data.frame(image="![](../docs/table1.jpg)")
+temp.mat <- as.matrix(temp.df)
+colnames(temp.mat) <- NULL
+knitr::kable(temp.mat, caption="Linear Regression Summary")
+```
 
 # Discussion
 
@@ -102,4 +105,6 @@ This study offers a comprehensive analysis of COVID-19 trends but has notable li
 
 In conclusion, this study emphasizes the dynamic nature of the COVID-19 pandemic, with significant variations across time, geography, and population groups. Vaccination campaigns were instrumental in reducing mortality and reducing the virus’s impact, but persistent disparities reveal the need for targeted public health interventions. By addressing systemic inequities and enhancing preparedness, we can build a more equitable and effective healthcare system capable of responding to future health crises.
 
-# Reference
+\newpage
+# References
+
